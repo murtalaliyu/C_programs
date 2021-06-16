@@ -1,13 +1,25 @@
+// import C libraries
 #include <stdio.h>
 #include <string.h>
 
+// import files
 #include "longest_line.c"
 #include "chp_2.c"
 #include "chp_3.c"
 #include "chp_4.c"
 
+// symbolic constants
 #define VOID 0
 #define MAXLINE 1000
+
+// macros
+#define square(x) (x) * (x)	// You should absolutely always put macro arguments between parentheses
+#define dprint(expr)	printf(#expr " = %g\n", expr)
+#define swap(t,x,y)	({	\
+	t temp = x;	\
+	x = y;	\
+	y = temp;	\
+})
 
 // prototypes
 int one();
@@ -19,6 +31,10 @@ int run_binsearch();
 int run_reverse();
 int run_pattern();
 int run_rud_calc();
+void run_qsort();
+void run_square_macro();
+void run_print_division_macro();
+void run_swap_macro();
 
 // external variables
 char pattern[] = "ould";	// pattern to search for
@@ -39,9 +55,38 @@ int main() {
 	//run_reverse();
 	//run_pattern();
 	//run_rud_calc();
-
 	//printd(123);
+	//run_qsort();
+	//run_square_macro();
+	//run_print_division_macro();
+	run_swap_macro();
+}
 
+// swap macro
+void run_swap_macro() {
+	char x = 'a', y = 'b';
+	swap(char,x,y);
+	printf("char:\tx=%c, y=%c\n", x,y);
+
+	int m = 1, n = 2;
+	swap(int,m,n);
+	printf("int:\tm=%d, n=%d\n", m,n);
+}
+
+// print division macro
+void run_print_division_macro() {
+	double x = 10, y = 5;
+	dprint(x/y);
+}
+
+// square macro
+void run_square_macro() {
+	int z = 5;
+	printf("square: %d", square(z+1));
+}
+
+// recursive quick sort
+void run_qsort() {
 	int arr[] = {8,6,2,7,4,1};
 	qsort(arr, 0, 5);
 	for (int i = 0; i < 6; i++) {
