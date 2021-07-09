@@ -7,6 +7,7 @@
 #include "chp_2.c"
 #include "chp_3.c"
 #include "chp_4.c"
+#include "chp_5.c"
 
 // symbolic constants
 #define VOID 0
@@ -15,7 +16,7 @@
 // macros
 #define square(x) (x) * (x)	// You should absolutely always put macro arguments between parentheses
 #define dprint(expr)	printf(#expr " = %g\n", expr)
-#define swap(t,x,y)	({	\
+#define sw_ap(t,x,y)	({	\
 	t temp = x;	\
 	x = y;	\
 	y = temp;	\
@@ -34,7 +35,8 @@ int run_rud_calc();
 void run_qsort();
 void run_square_macro();
 void run_print_division_macro();
-void run_swap_macro();
+void run_sw_ap_macro();
+void run_str_len();
 
 // external variables
 char pattern[] = "ould";	// pattern to search for
@@ -59,17 +61,34 @@ int main() {
 	//run_qsort();
 	//run_square_macro();
 	//run_print_division_macro();
-	run_swap_macro();
+	//run_sw_ap_macro();
+	run_str_len();
 }
 
-// swap macro
-void run_swap_macro() {
+void run_str_len() {
+	printf("%d\n", str_len("hello, world"));	// string constant
+	char array[] = {'h', 'e', 'l', 'l', '0'};
+	printf("%d\n", str_len(array));		// not sure why this is not 5 (says 8)
+	char *ptr = array;
+	printf("%d\n", str_len(ptr));
+
+	*ptr = *array;
+	printf("%c\n", *ptr);
+
+	int a[] = {5,4,3,2,1};
+	int *p = a+2;	// &a[2] is also equivalent
+	printf("%p\n", p);
+	printf("%d\n", *p);
+}
+
+// sw_ap macro
+void run_sw_ap_macro() {
 	char x = 'a', y = 'b';
-	swap(char,x,y);
+	sw_ap(char,x,y);
 	printf("char:\tx=%c, y=%c\n", x,y);
 
 	int m = 1, n = 2;
-	swap(int,m,n);
+	sw_ap(int,m,n);
 	printf("int:\tm=%d, n=%d\n", m,n);
 }
 
